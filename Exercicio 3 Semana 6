@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+// Exercício 3: Contagem regressiva usando do-while
+public class ContagemRegressiva {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite um número para iniciar a contagem regressiva: ");
+        int numero = scanner.nextInt();
+
+        if (numero < 0) {
+            System.out.println("Por favor, insira um número inteiro positivo.");
+        } else {
+            do {
+                System.out.println(numero);
+                numero--;
+            } while (numero >= 0);
+        }
+
+        scanner.close();
+    }
+}
