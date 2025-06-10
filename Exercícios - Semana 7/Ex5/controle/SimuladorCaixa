@@ -1,0 +1,29 @@
+package controle;
+
+import dominio.CaixaEletronico;
+import java.util.Scanner;
+
+public class SimuladorCaixa {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CaixaEletronico caixa = new CaixaEletronico(500); // Saldo inicial de R$ 500
+
+        int opcao;
+        do {
+            System.out.println("1 - Sacar | 2 - Exibir Saldo | 0 - Sair");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1 -> {
+                    System.out.print("Valor do saque: ");
+                    if (!caixa.sacar(scanner.nextDouble())) {
+                        System.out.println("Valor inválido ou saldo insuficiente!");
+                    }
+                }
+                case 2 -> caixa.exibirSaldo();
+            }
+        } while (opcao != 0);
+
+        scanner.close();
+    }
+}
