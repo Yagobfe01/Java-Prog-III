@@ -1,0 +1,22 @@
+package controle;
+
+import dominio.Funcionario;
+import java.util.Scanner;
+
+public class GerenciadorFuncionario {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nome do funcionário: ");
+        String nome = scanner.nextLine();
+        System.out.print("Salário base: ");
+        double salario = scanner.nextDouble();
+        System.out.print("Categoria (A, B, C): ");
+        String categoria = scanner.next();
+
+        Funcionario funcionario = new Funcionario(nome, salario, categoria);
+        System.out.println("Salário final: R$ " + funcionario.calcularSalarioFinal());
+
+        scanner.close();
+    }
+}
