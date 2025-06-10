@@ -1,0 +1,27 @@
+//-----------------------------------------------------------------------------------------------------
+
+package controle;
+
+import dominio.Elevador;
+import java.util.Scanner;
+
+public class SimuladorElevador {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Elevador elevador = new Elevador(10); // Exemplo com 10 andares
+
+        int opcao;
+        do {
+            System.out.println("1 - Subir | 2 - Descer | 3 - Exibir Andar | 0 - Sair");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1 -> elevador.subir();
+                case 2 -> elevador.descer();
+                case 3 -> elevador.exibirAndar();
+            }
+        } while (opcao != 0);
+
+        scanner.close();
+    }
+}
