@@ -1,0 +1,94 @@
+package controle;
+
+import dominio.Automovel;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ControlaVeiculo controle = new ControlaVeiculo();
+        Scanner sc = new Scanner(System.in);
+        controle.carregarDados();
+
+        int opcao;
+        do {
+            System.out.println("\n1 - Incluir automóvel");
+            System.out.println("2 - Remover automóvel");
+            System.out.println("3 - Alterar dados de automóvel");
+            System.out.println("4 - Consultar automóvel por placa");
+            System.out.println("5 - Listar automóveis (ordenado)");
+            System.out.println("6 - Salvar e sair");
+            System.out.print("Escolha: ");
+            opcao = sc.nextInt();
+            sc.nextLine(); // limpa buffer
+
+            switch (opcao) {
+                case 1 -> {
+                    System.out.print("Placa: ");
+                    String placa = sc.nextLine();
+                    System.out.print("Modelo: ");
+                    String modelo = sc.nextLine();
+                    System.out.print("Marca: ");
+                    String marca = sc.nextLine();
+                    System.out.print("Ano: ");
+                    int ano = sc.nextInt();
+                    System.out.print("Valor: ");
+                    double valor = sc.nextDouble();
+                    Automovel a = new Automovel(placa, modelo, marca, ano, valor);
+                    if (controle.inserirAutomovel(a)) {
+                        System.out.println("Automóvel inserido.");
+                    } else {
+                        System.out.println("Placa já existente!");
+                    }
+                }
+                case 2 -> {
+                    System.out.print("Placa: ");
+                    String placa = sc.nextLine();
+                    if (controle.removerAutomovel(placa)) {
+                        System.out.println("Automóvel removido.");
+                    } else {
+                        System.out.println("Não encontrado.");
+                    }
+                }
+                case 3 -> {
+                    System.out.print("Placa: ");
+                    String placa = sc.nextLine();
+                    System.out.print("Novo Modelo: ");
+                    String modelo = sc.nextLine();
+                    System.out.print("Nova Marca: ");
+                    String marca = sc.nextLine();
+                    System.out.print("Novo Ano: ");
+                    int ano = sc.nextInt();
+                    System.out.print("Novo Valor: ");
+                    double valor = sc.nextDouble();
+                    if (controle.alterarAutomovel(placa, modelo, marca, ano, valor)) {
+                        System.out.println("Automóvel alterado.");
+                    } else {
+                        System.out.println("Não encontrado.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("Placa: ");
+                    String placa = sc.nextLine();
+                    Automovel a = controle.buscarPorPlaca(placa);
+                    if (a != null) {
+                        System.out.println(a.toDisplayString());
+                    } else {
+                        System.out.println("Não encontrado.");
+                    }
+                }
+                case 5 -> {
+                    System.out.print("Ordenar por (placa/modelo/marca): ");
+                    String crit = sc.nextLine();
+                    controle.listarAutomoveisOrdenados(crit);
+                }
+                case 6 -> {
+                    controle.salvarDados();
+                    System.out.println("Saindo...");
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 6);
+
+        sc.close();
+    }
+}
